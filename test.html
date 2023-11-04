@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>跑酷小游戏</title>
+    <style>
+        #game-container {
+            width: 400px;
+            height: 200px;
+            border: 1px solid black;
+            position: relative;
+        }
+        #player {
+            width: 50px;
+            height: 50px;
+            background: url('home03.gif');
+            background-size: cover;
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+        }
+        .obstacle {
+            width: 50px;
+            height: 50px;
+            background: url('Love01.png');
+            background-size: cover;
+            position: absolute;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="player"></div>
+    </div>
+    <script>
+        const player = document.getElementById("player");
+        let jumping = false;
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === " ") {
+                if (!jumping) {
+                    jump();
+                }
+            }
+        });
+
+        function jump() {
+            jumping = true;
+            let jumpHeight = 100;
+            let jumpDuration = 500;
+
+            player.style.transition = `bottom ${jumpDuration}ms ease-in`;
+            player.style.bottom = `${jumpHeight}px`;
+
+            setTimeout(function () {
+                player.style.transition = `bottom ${jumpDuration}ms ease-out`;
+                player.style.bottom = "0";
+
+                setTimeout(function () {
+                    jumping = false;
+                }, jumpDuration);
+            }, jumpDuration);
+        }
+
+        function createObstacle() {
+            const obstacle = document.createElement("div");
+            obstacle.className = "obstacle";
+            obstacle.style.left = "400px";
+            document.getElementById("game-container").appendChild(obstacle);
+
+            const obstacleMoveSpeed = 5;
+            const obstacleInterval = setInterval(function () {
+                const obstacleLeft = parseFloat(obstacle.style.left);
+                if (obstacleLeft < -50) {
+                    obstacle.remove();
+                    clearInterval(obstacleInterval);
+                } else {
+                    obstacle.style.left = obstacleLeft - obstacleMoveSpeed + "px";
+                }
+            }, 20);
+        }
+
+        setInterval(createObstacle, 2000);
+    </script>
+</body>
+</html>

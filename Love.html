@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>DreamingLab</title>
+    <style>
+        @font-face{
+            font-family:"華康秀風體";
+            src: url(華康秀風體.TTF);
+        }
+        body {
+            background: linear-gradient(#164863 90%, #427D9D);
+            height: 100vh;
+        }
+        #C li{
+            display:inline;
+            background-color: #164863;
+        }
+        a:link{
+                color: 	#DDF2FD;
+                text-decoration: none;
+                text-decoration-color: white;
+                padding: 14px 16px;
+            }
+        a:hover{
+            background-color: #9BBEC8;
+            color: #427D9D;
+            text-decoration: none;
+            text-decoration-color: white;
+       }
+       a:active{
+            background-color: antiquewhite;
+       }
+       .topnav {
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            font-family:Courier
+        }
+        #game-container {
+            width: 800px;
+            height: 600px;
+            background-color: #1c4157;
+            border-radius:10%;
+            position: relative;
+        }
+        #player {
+            width: 89px;
+            height: 150px;
+            background: url('Love01.png');
+            background-size: cover;
+            position: absolute;
+            bottom: 0px;
+            left: 30px;
+        }
+        .obstacle {
+            width: 50px;
+            height: 50px;
+            background: url('home03.gif');
+            background-size: cover;
+            position: absolute;
+            bottom: 80px;
+        }
+        main{
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center; /* 垂直居中 */
+        }
+    </style>
+</head>
+<body onload="startGame()">
+    <header>
+    <div class="topnav">
+        <ul id="C">
+            <li><a href="AboutUS.html">About us</a></li>
+            <li><a href="Love.html">Love</a></li>
+            <li><a href="home.html"><img src="home03.gif" title="Home"></a></li>
+            <li><a href="Story.html">Story</a></li>
+            <li><a href="Others.html">Others</a></li>
+        </ul>
+    </div>
+    </header>
+    <br>
+    <main>
+        <div id="game-container">
+            <p style="text-align: center;font-family:Courier;color: #9BBEC8;">Socre:<span id="score">0</span></p>
+            <div id="player"></div>
+        </div>
+        
+        <script>
+            const player = document.getElementById("player");
+            let jumping = false;
+            let score = 0;
+            document.addEventListener("keydown", function (event) {
+                if (event.key === " ") {
+                    if (!jumping) {
+                        jump();
+                    }
+                }
+            });
+
+            function jump() {
+                jumping = true;
+                let jumpHeight = 200;
+                let jumpDuration = 600;
+
+                player.style.transition = `bottom ${jumpDuration}ms ease-in`;
+                player.style.bottom = `${jumpHeight}px`;
+
+                setTimeout(function () {
+                    player.style.transition = `bottom ${jumpDuration}ms ease-out`;
+                    player.style.bottom = "0";
+
+                    setTimeout(function () {
+                        jumping = false;
+                    }, jumpDuration);
+                }, jumpDuration);
+            }
+
+            function createObstacle() {
+                const obstacle = document.createElement("div");
+                obstacle.className = "obstacle";
+                obstacle.style.left = "750px";
+                document.getElementById("game-container").appendChild(obstacle);
+
+                const obstacleMoveSpeed = 6;
+                const obstacleInterval = setInterval(function () {
+                    const obstacleLeft = parseFloat(obstacle.style.left);
+                    if (obstacleLeft < 0) {
+                        obstacle.remove();
+                        clearInterval(obstacleInterval);
+                    } else {
+                        obstacle.style.left = obstacleLeft - obstacleMoveSpeed + "px";
+                        if (isColliding(player, obstacle)) {
+                            obstacle.remove();
+                            increaseScore();
+                        }
+                    }
+                }, 20);
+            }
+            function isColliding(element1, element2) {
+                const rect1 = element1.getBoundingClientRect();
+                const rect2 = element2.getBoundingClientRect();
+
+                return (
+                    rect1.right > rect2.left &&
+                    rect1.left < rect2.right &&
+                    rect1.bottom > rect2.top &&
+                    rect1.top < rect2.bottom
+                );
+            }
+            function increaseScore() {
+                score += 10; // 增加分数
+                document.getElementById("score").textContent = score;
+            }
+            setInterval(createObstacle, 2000);
+        </script>
+    </main>
+</body>
+</html>
