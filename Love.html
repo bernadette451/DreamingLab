@@ -83,7 +83,7 @@
     <br>
     <main>
         <div id="game-container">
-            <p style="text-align: center;font-family:Courier;color: #9BBEC8;">Socre:<span id="score">0</span></p>
+            <p style="text-align: center;font-family:Courier;color: #9BBEC8;">Score:<span id="score">0</span></p>
             <div id="player"></div>
         </div>
         
@@ -150,7 +150,7 @@
                 );
             }
             function increaseScore() {
-                score += 10; // 增加分数
+                score += 10;
                 document.getElementById("score").textContent = score;
             }
             setInterval(createObstacle, 2000);

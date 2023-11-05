@@ -13,6 +13,7 @@
             height: 100vh;
         }
         #C li{
+            /* content: ""; */
             display:inline;
             background-color: #164863;
         }
@@ -34,17 +35,17 @@
        .topnav {
             text-align: center;
             overflow: hidden;
-            position: relative;
+            /* position: relative; */
             font-family:Courier
         }
         .left-column {
+            
             float: left;
             width: 50%;
             text-align: center;
             font-family:華康秀風體;
             color: #9BBEC8;
         }
-
         .right-column {
             float: right;
             width: 50%;
@@ -52,7 +53,26 @@
             font-family:華康秀風體;
             color: #9BBEC8;
         }
-        
+        .list-item {
+            cursor: pointer;
+            margin: 5px 0;
+            text-align: left;
+        }
+        .list-item-content {
+            display: none;
+        }
+        #B ul {
+            list-style: none;
+            text-align: left;
+        }
+        #A li::before {
+            /* content: "\21E2"; */
+            margin-right: 5px;
+        }
+        #CC li::before {
+            content: "\2714";
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -73,6 +93,30 @@
         <h2>佐久早聖臣</h2>
         <p>職業排球運動員</p>
         <p>身高：192cm</p>
+        <div style="display: flex;justify-content: center;margin-left: 100px;"></div>
+        <ul id="B">
+            <li class="list-item">性格</li>
+            <div class="list-item-content">
+                <ul id="CC">
+                    <li>123</li>
+                </ul>
+            </div>
+            <li class="list-item">外貌特徵</li>
+            <div class="list-item-content">
+                <ul id="CC">
+                    <li>黑髮黑眼</li>
+                    <li>右眉毛上有兩顆痣</li>
+                </ul>
+            </div>
+            <li class="list-item">其他</li>
+            <div class="list-item-content">
+                <ul id="CC">
+                    <li>2021東京奧運日本代表成員 OH</li>
+                    <li>生日：03/20</li>
+                </ul>
+            </div>
+        </ul>
+        </div>
     </div>
 
     <div class="right-column">
@@ -80,6 +124,43 @@
         <h2>森下ベルニ</h2>
         <p>物理系博士生</p>
         <p>身高：152cm</p>
+        <div style="display: flex;justify-content: center;margin-right: 110px;">
+            <ul id="B">
+                <li class="list-item">性格</li>
+                <div class="list-item-content">
+                    <ul id="CC">
+                        <li>123</li>
+                    </ul>
+                </div>
+                <li class="list-item">外貌特徵</li>
+                <div class="list-item-content">
+                    <ul id="CC">
+                        <li>金髮橘眼，左眼下方有淚痣</li>
+                        <li>兩邊各有一撮翹起來的頭髮</li>
+                        <li>兩邊耳朵都有耳釘</li>
+                        <li>單邊虎牙</li>
+                        <li>鬢角一長一短（長的那邊長度到鎖骨以下）</li>
+                        <li>右肩跟右大腿內側各有一顆痣</li>
+                    </ul>
+                </div>
+                <li class="list-item">其他</li>
+                <div class="list-item-content">
+                    <ul id="CC">
+                        <li>主要研究領域是太陽物理跟太空電漿模擬</li>
+                        <li>生日：10/28</li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
     </div>
+    <script>
+        const listItems = document.querySelectorAll('.list-item');
+        listItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const content = item.nextElementSibling;
+                content.style.display = content.style.display === 'none' ? 'block' : 'none';
+            });
+        });
+    </script>
 </body>
 </html>
