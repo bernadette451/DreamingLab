@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>DreamingLab</title>
+    <style>
+        @font-face{
+            font-family:"華康秀風體";
+            src: url(華康秀風體.TTF);
+        }
+        body {
+            background: linear-gradient(#164863 90%, #427D9D);
+            height: 100vh;
+        }
+        #C li{
+            display:inline;
+            background-color: #164863;
+        }
+        a:link{
+                color: 	#DDF2FD;
+                text-decoration: none;
+                text-decoration-color: white;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+        a:hover{
+            background-color: #9BBEC8;
+            color: #427D9D;
+            text-decoration: none;
+            text-decoration-color: white;
+       }
+       a:active{
+            background-color: antiquewhite;
+       }
+       .topnav {
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            font-family:Courier
+        }
+        canvas {
+            /* border:1px solid #d3d3d3; */
+            background-color: #1c4157;
+            position: relative;
+            border-radius:10%;
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body onload="startGame()">
+    <header>
+    <div class="topnav">
+        <ul id="C">
+            <li><a href="AboutUS.html">About us</a></li>
+            <li><a href="Love.html">Love</a></li>
+            <li><a href="home.html"><img src="home03.gif" title="Home"></a></li>
+            <li><a href="Story.html">Story</a></li>
+            <li><a href="Others.html">Others</a></li>
+        </ul>
+    </div>
+    </header>
+    <br>
+    <main>
+        <canvas id="game-container"></canvas>
+        <script src="love.js"></script>
+    </main>
+</body>
+</html>
